@@ -45,6 +45,7 @@ class Model:
             validation_split=validation_split,
             callbacks=self.callbacks
         )
+        self.history = history
 
         idx = np.argmax(history.history['val_accuracy'])
         print("Epoch:", idx+1)
