@@ -40,7 +40,7 @@ class Model:
             images,
             labels,
             batch_size=batch_size,
-            epoch=epoch,
+            epochs=epoch,
             shuffle=True,
             validation_split=validation_split,
             callbacks=self.callbacks
