@@ -6,6 +6,7 @@ class Model:
     def __init__(self, model, lr: float, model_checkpoint_loc: str, loss_function: str):
         self.best_model = model_checkpoint_loc+'/weights.{:02d}-{:.2f}-{:.2f}.hdf5'
         self.headless_model = None
+        self.model = model
 
         tf.random.set_seed(
             42
@@ -26,7 +27,7 @@ class Model:
         )
 
         # Compile
-        self.model = model.compile(optimizer=optim, loss=loss_function, metrics=['accuracy'])
+        self.model.compile(optimizer=optim, loss=loss_function, metrics=['accuracy'])
 
         self.callbacks = [
             lr_reducer,
