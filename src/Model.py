@@ -21,8 +21,8 @@ class Model:
         checkpoint = tf.keras.callbacks.ModelCheckpoint(
             filepath=model_checkpoint_loc+'/weights.{epoch:02d}-{val_loss:.2f}-{val_accuracy:.2f}.hdf5',
             save_weights_only=True,
-            monitor='val_accuracy',
-            mode='max',
+            monitor='val_loss',
+            mode='min',
             save_best_only=True
         )
 
@@ -47,7 +47,7 @@ class Model:
         )
         self.history = history
 
-        idx = np.argmax(history.history['val_accuracy'])
+        idx = np.argmin(history.history['val_loss'])
         print("Epoch:", idx+1)
         for key in history.history.keys():
             print(f'{key}:{round(history.history[key][idx], 2)}')
