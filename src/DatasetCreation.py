@@ -18,11 +18,7 @@ class DatasetCreation:
         list_images = []
 
         for img_path in tqdm(image_loc):
-            try:
-                image = cv2.imread(img_path)
-            except:
-                print("file not found error")
-                continue
+            image = cv2.imread(img_path)
             image = cv2.resize(image, (224, 224))
             image = image_processing(image) if image_processing else self.__normalise_image(image)
             arr = np.array(image)
