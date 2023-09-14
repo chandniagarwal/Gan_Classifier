@@ -157,7 +157,7 @@ class elm:
         self.y_ = self.__hidden2output(self.H)
 
         if self.elm_type == 'clf':
-            unique_positions = np.where(self.y_ == np.max(self.y_, axis=1).reshape(-1, 1))[1]
+            unique_positions = np.where(self.y_ == np.max(self.y_, axis=1).reshape(-1, 1))
             for idx, val in zip(unique_positions[0], unique_positions[1]):
               if idx not in idx_set:
                 labels.append(val)
