@@ -151,10 +151,18 @@ class elm:
         predicted results
     '''
     def predict(self, x):
+        idx_set = set()
+        labels = []
         self.H = self.__input2hidden(x)
         self.y_ = self.__hidden2output(self.H)
+
         if self.elm_type == 'clf':
-            self.y_ = np.where(self.y_ == np.max(self.y_, axis=1).reshape(-1, 1))[1]
+            unique_positions = np.where(self.y_ == np.max(self.y_, axis=1).reshape(-1, 1))[1]
+            for idx, val in zip(unique_positions[0], unique_positions[1]):
+              if idx not in idx_set:
+                labels.append(val)
+                idx_set.add(idx)
+            self.y_ = np.array(labels)
 
         return self.y_
 
