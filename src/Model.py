@@ -1,6 +1,6 @@
 import tensorflow as tf
 import numpy as np
-
+import matplotlib.pyplot as plt
 
 class Model:
     def __init__(self, model, lr: float, model_checkpoint_loc: str, loss_function: str):
@@ -15,7 +15,7 @@ class Model:
         optim = tf.optimizers.Adam(learning_rate=lr)
 
         lr_reducer = tf.keras.callbacks.ReduceLROnPlateau(
-            monitor='val_loss', factor=0.5, patience=2, min_lr=0.00001
+            monitor='val_loss', factor=0.5, patience=4, min_lr=0.00001
         )
 
         checkpoint = tf.keras.callbacks.ModelCheckpoint(
@@ -48,6 +48,39 @@ class Model:
         self.history = history
 
         idx = np.argmin(history.history['val_loss'])
+
+        # Get training and test loss histories
+        training_loss = history.history['loss']
+        test_loss = history.history['val_loss']
+
+        # Create count of the number of epochs
+        epoch_count = range(1, len(training_loss) + 1)
+
+        # Visualize loss history
+        plt.plot(epoch_count, training_loss, 'r--')
+        plt.plot(epoch_count, test_loss, 'b-')
+        plt.legend(['Training Loss', 'Test Loss'])
+        plt.xlabel('Epoch')
+        plt.ylabel('Loss')
+        plt.title('Loss')
+        plt.show()
+
+        # Get training and test accuracy histories
+        training_accuracy = history.history['accuracy']
+        test_accuracy = history.history['val_accuracy']
+
+        # Create count of the number of epochs
+        epoch_count = range(1, len(training_accuracy) + 1)
+
+        # Visualize loss history
+        plt.plot(epoch_count, training_accuracy, 'r--')
+        plt.plot(epoch_count, test_accuracy, 'b-')
+        plt.legend(['Training Accuracy', 'Accuracy'])
+        plt.xlabel('Epoch')
+        plt.ylabel('Accuracy')
+        plt.title('Accuracy')
+        plt.show()
+
         print("Epoch:", idx+1)
         for key in history.history.keys():
             print(f'{key}:{round(history.history[key][idx], 2)}')
