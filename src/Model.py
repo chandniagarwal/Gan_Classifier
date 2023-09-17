@@ -59,7 +59,7 @@ class Model:
         # Visualize loss history
         plt.plot(epoch_count, training_loss, 'r--')
         plt.plot(epoch_count, test_loss, 'b-')
-        plt.legend(['Training Loss', 'Test Loss'])
+        plt.legend(['Training Loss', 'Validation Loss'])
         plt.xlabel('Epoch')
         plt.ylabel('Loss')
         plt.title('Loss')
@@ -75,7 +75,7 @@ class Model:
         # Visualize loss history
         plt.plot(epoch_count, training_accuracy, 'r--')
         plt.plot(epoch_count, test_accuracy, 'b-')
-        plt.legend(['Training Accuracy', 'Accuracy'])
+        plt.legend(['Training Accuracy', 'Validation Accuracy'])
         plt.xlabel('Epoch')
         plt.ylabel('Accuracy')
         plt.title('Accuracy')
