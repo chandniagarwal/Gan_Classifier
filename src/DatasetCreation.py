@@ -19,7 +19,7 @@ class DatasetCreation:
 
         for img_path in tqdm(image_loc):
             image = cv2.imread(img_path)
-            image = cv2.resize(image, (256, 256))
+            image = cv2.resize(image, (224, 224))
             image = image_processing(image) if image_processing else self.__normalise_image(image)
             arr = np.array(image)
             list_images.append(arr)
